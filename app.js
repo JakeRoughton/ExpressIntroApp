@@ -1,4 +1,3 @@
-``
 		// Bring in Express code
 		const express = require('express')
 
@@ -32,12 +31,15 @@
 			const foundTitle = favoriteMovieList.find((title)=>{
 				return title
 			})
-
-			res.json({
-				success:true,
-				foundTitle: foundTitle
+			if(req.body.title === undefined || typeof(req.body.title ) !== "string") {
+				res.json({
+					success:true,
+					foundTitle: foundTitle
 			})
-		})
+		}
+	})
+	
+	
 
 		app.post('/new-movie', (req,res)=>{
 			if (req.body.title === undefined || typeof(req.body.title) !== "string") {
@@ -88,6 +90,14 @@
 			const originalMovieIndex = favoriteMovieList.findIndex((favoriteMovieList)=>{
 				return favoriteMovieList.title ===titleToFind
 			})
+
+			if (req.body.title === undefined || typeof(req.body.title) !== "string") {
+				res.json({
+					success: false,
+					message: "movie title is required and must be a string"
+				})
+				return
+			}
 
 			if(!originalMovie){
 				res.json({
