@@ -28,7 +28,7 @@
 		})
 
 		app.get('/single-movie/:titleToFind', (req,res)=>{
-			const foundTitle = favoriteMovieList.find((title)=>{
+			const foundTitle = favoriteMovieList.find((movie.title === req.params.titleToFind)=>{
 				return title
 			})
 			if(req.body.title === undefined || typeof(req.body.title ) !== "string") {
